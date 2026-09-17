@@ -64,14 +64,14 @@ export const ProjectsApp: React.FC = () => {
                 <div className="flex items-center space-x-2 text-xs font-bold text-blue-400 font-mono-code">
                   <FolderKanban className="w-4 h-4" />
                   <span className="tracking-widest uppercase">
-                    03 ENGINEERED SYSTEMS
+                    {filteredProjects.length.toString().padStart(2, '0')} ENGINEERED SYSTEMS
                   </span>
                 </div>
                 <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
                   PROJECTS
                 </h1>
                 <p className="text-sm sm:text-base text-white/70 max-w-2xl leading-relaxed font-sans">
-                  Production applications, asynchronous media processing pipelines, and real-time collaboration platforms built with modern software architecture.
+                  Production web applications, asynchronous processing pipelines, real-time collaboration platforms, and bespoke client systems.
                 </p>
               </div>
 
@@ -100,25 +100,28 @@ export const ProjectsApp: React.FC = () => {
             </div>
 
             {/* Projects Grid: Dominant, Spacious, High-Affordance Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {filteredProjects.map((proj) => (
                 <motion.div
                   key={proj.id}
                   whileHover={{ y: -6 }}
                   onClick={() => handleOpenProject(proj)}
-                  className="p-8 rounded-2xl bg-[#101220] border border-white/[0.1] hover:border-blue-500/60 hover:bg-[#141728] transition-all cursor-pointer flex flex-col justify-between space-y-6 group shadow-xl hover:shadow-2xl"
+                  className="p-7 sm:p-8 rounded-2xl bg-[#101220] border border-white/[0.1] hover:border-blue-500/60 hover:bg-[#141728] transition-all cursor-pointer flex flex-col justify-between space-y-6 group shadow-xl hover:shadow-2xl"
                 >
                   <div className="space-y-4">
-                    {/* Header: Type Badge & Year */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold px-3 py-1 rounded-md bg-blue-500/15 text-blue-400 border border-blue-500/30 uppercase tracking-wider font-mono-code">
-                        {proj.id === 'ai-video-clipper'
-                          ? 'AI MEDIA PROCESSING'
-                          : proj.id === 'shoel'
-                          ? 'REAL-TIME COLLABORATIVE PLATFORM'
-                          : 'ASYNCHRONOUS MEDIA ENGINE'}
+                    {/* Header: Type Badge, Live Status & Year */}
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/15 text-blue-400 border border-blue-500/30 uppercase tracking-wider font-mono-code">
+                        {proj.category}
                       </span>
-                      <span className="text-xs text-white/40 font-mono-code">{proj.year}</span>
+                      <div className="flex items-center space-x-2">
+                        {proj.status === 'live' && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono-code">
+                            ● LIVE
+                          </span>
+                        )}
+                        <span className="text-xs text-white/40 font-mono-code">{proj.year}</span>
+                      </div>
                     </div>
 
                     {/* Title */}
@@ -127,12 +130,8 @@ export const ProjectsApp: React.FC = () => {
                     </h2>
 
                     {/* Clean One-Sentence Human Description */}
-                    <p className="text-sm text-white/80 leading-relaxed font-sans">
-                      {proj.id === 'ai-video-clipper'
-                        ? 'Automatically analyzes video, detects important moments, and generates clips with captions.'
-                        : proj.id === 'shoel'
-                        ? 'Real-time student collaboration and study platform with peer networking, study rooms, and interactive tools.'
-                        : 'High-performance video transcoding engine with asynchronous job queues, FFmpeg processing, and status polling.'}
+                    <p className="text-sm text-white/80 leading-relaxed font-sans line-clamp-2">
+                      {proj.tagline}
                     </p>
                   </div>
 
@@ -179,68 +178,113 @@ export const ProjectsApp: React.FC = () => {
             className="p-6 sm:p-10 max-w-7xl mx-auto w-full space-y-8"
           >
             {/* Top Navigation Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.1]">
               <button
                 onClick={handleBackToProjects}
-                className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white/80 hover:text-white border border-white/[0.08] flex items-center space-x-2 text-xs font-bold font-mono-code transition-colors self-start cursor-pointer active:scale-95"
+                className="px-4 py-2.5 rounded-xl bg-[#141728] hover:bg-[#1e233d] text-white border border-white/20 hover:border-blue-400/60 flex items-center space-x-2 text-xs font-bold font-mono-code transition-all self-start cursor-pointer shadow-md active:scale-95"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4 text-blue-400" />
                 <span>← BACK TO ALL PROJECTS</span>
               </button>
 
               <div className="flex items-center space-x-3">
-                <span className="text-xs px-3 py-1 rounded-md bg-blue-500/15 text-blue-400 border border-blue-500/30 font-mono-code font-bold uppercase tracking-wider">
+                <span className="text-xs px-3.5 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/30 font-mono-code font-bold uppercase tracking-wider">
                   {selectedProject.category} // {selectedProject.year}
                 </span>
               </div>
             </div>
 
-            {/* Project Hero Title & Overview */}
-            <div className="space-y-3">
-              <div className="text-xs font-bold text-blue-400 font-mono-code uppercase tracking-widest">
-                SYSTEM DEEP DIVE
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                {selectedProject.name}
-              </h1>
-              <p className="text-base sm:text-lg text-white/80 font-sans max-w-3xl leading-relaxed">
-                {selectedProject.overview}
-              </p>
-            </div>
-
-            {/* Progressive Disclosure Section Tabs (Clean Solid Buttons) */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              {[
-                { id: 'architecture' as DetailTab, label: 'ARCHITECTURE', icon: Layers },
-                { id: 'engineering' as DetailTab, label: 'ENGINEERING DECISIONS', icon: GitBranch },
-                { id: 'technologies' as DetailTab, label: 'TECHNOLOGIES', icon: Code2 },
-                { id: 'challenges' as DetailTab, label: 'CHALLENGES SOLVED', icon: Activity },
-              ].map((tab) => {
-                const Icon = tab.icon;
-                const isSelected = activeTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => {
-                      sounds.playClick(850);
-                      setActiveTab(tab.id);
-                    }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold font-mono-code flex items-center space-x-2 transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-blue-600 text-white border border-blue-500 shadow-md scale-[1.02]'
-                        : 'bg-[#121420] text-white/70 hover:text-white hover:bg-[#1a1d2e] border border-white/[0.12] active:scale-95'
+            {/* Project Hero Title, Overview & Actions */}
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-2">
+              <div className="space-y-4 max-w-3xl">
+                <div className="flex items-center gap-2.5 flex-wrap">
+                  <span className="text-[11px] font-bold px-3 py-1 rounded-lg bg-blue-500/15 text-blue-400 border border-blue-500/30 uppercase tracking-widest font-mono-code">
+                    {selectedProject.category}
+                  </span>
+                  <span className="text-xs text-white/40 font-mono-code font-semibold">
+                    • {selectedProject.year}
+                  </span>
+                  <span
+                    className={`text-[11px] font-bold px-3 py-1 rounded-lg font-mono-code uppercase ${
+                      selectedProject.status === 'live'
+                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/40'
+                        : 'bg-amber-500/15 text-amber-400 border border-amber-500/40'
                     }`}
                   >
-                    <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-blue-400'}`} />
-                    <span>{tab.label}</span>
-                  </button>
-                );
-              })}
+                    ● {selectedProject.status}
+                  </span>
+                </div>
+
+                <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                  {selectedProject.name}
+                </h1>
+                <p className="text-sm sm:text-base text-white/80 font-sans leading-relaxed">
+                  {selectedProject.overview}
+                </p>
+              </div>
+
+              {/* Action Buttons (Live Site / GitHub) */}
+              <div className="flex flex-wrap lg:flex-col gap-3 shrink-0 pt-2 lg:pt-0">
+                {selectedProject.demoUrl && (
+                  <a
+                    href={selectedProject.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-400 font-bold text-xs font-mono-code flex items-center justify-center space-x-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 transition-all cursor-pointer active:scale-95"
+                  >
+                    <span>OPEN LIVE DEMO</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {selectedProject.githubUrl && selectedProject.githubUrl !== '[ADD GITHUB LINK]' && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 rounded-xl bg-[#141728] hover:bg-[#1e233d] text-white border border-white/20 hover:border-white/40 font-bold text-xs font-mono-code flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-md active:scale-95"
+                  >
+                    <span>SOURCE CODE</span>
+                    <GitBranch className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Distinct Segmented Navigation Bar with Clear Borders and Gaps */}
+            <div className="py-3">
+              <div className="flex flex-wrap items-center gap-3 p-2 rounded-2xl bg-[#0b0d18] border border-white/15 shadow-xl">
+                {[
+                  { id: 'architecture' as DetailTab, label: 'Architecture Graph', icon: Layers },
+                  { id: 'engineering' as DetailTab, label: 'Engineering Decisions', icon: GitBranch },
+                  { id: 'technologies' as DetailTab, label: 'System Stack', icon: Code2 },
+                  { id: 'challenges' as DetailTab, label: 'Challenges Solved', icon: Activity },
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  const isSelected = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => {
+                        sounds.playClick(850);
+                        setActiveTab(tab.id);
+                      }}
+                      className={`px-4 py-2.5 rounded-xl text-xs font-bold font-mono-code flex items-center space-x-2.5 transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-blue-600 border border-blue-400 text-white shadow-lg shadow-blue-600/30 ring-2 ring-blue-400/30 scale-[1.02]'
+                          : 'bg-[#131628] border border-white/20 text-white/80 hover:text-white hover:bg-[#1c2038] hover:border-white/40 active:scale-95'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-blue-400'}`} />
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Tab 1: System Architecture Visualizer */}
             {activeTab === 'architecture' && (
-              <div className="w-full">
+              <div className="w-full pt-3">
                 <ArchitectureDiagram project={selectedProject} />
               </div>
             )}

@@ -125,15 +125,19 @@ export const AboutApp: React.FC = () => {
             <div className="space-y-10">
               {/* SECTION 01: DEVELOPER IDENTITY (HERO) */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-xs font-mono-code text-blue-400 font-bold uppercase tracking-widest">
-                  <span className="px-2 py-0.5 rounded bg-blue-500/15 border border-blue-500/30">01</span>
-                  <span>PROFILE & IDENTITY</span>
+                <div className="flex items-center gap-3 pb-1">
+                  <span className="px-2.5 py-1 rounded-md bg-blue-500/20 border border-blue-500/40 text-blue-300 font-bold text-xs font-mono-code shadow-sm">
+                    01
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold font-mono-code uppercase tracking-widest text-white/90">
+                    PROFILE & IDENTITY
+                  </span>
                 </div>
 
                 <div className="p-7 sm:p-9 rounded-2xl bg-[#0e1220] border border-blue-500/30 shadow-2xl relative overflow-hidden">
                   <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
-                    {/* Portrait Avatar */}
-                    <div className="shrink-0 relative group">
+                    {/* Portrait Avatar & Status Badge */}
+                    <div className="shrink-0 flex flex-col items-center gap-3 group">
                       <div className="w-40 h-52 sm:w-48 sm:h-60 rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-[#141828] relative flex items-end justify-center">
                         <Image
                           src={identity.avatar || '/developer.png'}
@@ -144,7 +148,7 @@ export const AboutApp: React.FC = () => {
                           priority
                         />
                       </div>
-                      <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-[#090b14] border border-emerald-500/50 text-emerald-400 text-[10px] font-mono-code font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 whitespace-nowrap shadow-xl">
+                      <div className="bg-[#090b14] border border-emerald-500/50 text-emerald-400 text-[11px] font-mono-code font-bold px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap shadow-xl">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
                         <span>AVAILABLE FOR WORK</span>
                       </div>
@@ -178,17 +182,17 @@ export const AboutApp: React.FC = () => {
                       </p>
 
                       {/* Quick Exploration Pills */}
-                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 pt-2">
+                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
                         <button
                           onClick={() => openApp('projects')}
-                          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono-code font-bold text-xs flex items-center space-x-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                          className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-400 font-mono-code font-bold text-xs flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                         >
                           <Code2 className="w-3.5 h-3.5" />
-                          <span>03 Engineered Projects →</span>
+                          <span>Projects Catalog →</span>
                         </button>
                         <button
                           onClick={() => openApp('skills')}
-                          className="px-4 py-2 rounded-xl bg-[#161a2e] hover:bg-[#202642] text-white/90 hover:text-white border border-white/20 font-mono-code font-bold text-xs flex items-center space-x-2 transition-all active:scale-95 cursor-pointer"
+                          className="px-4 py-2.5 rounded-xl bg-[#161a2e] hover:bg-[#202642] text-white/90 hover:text-white border border-white/20 font-mono-code font-bold text-xs flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
                         >
                           <Cpu className="w-3.5 h-3.5 text-purple-400" />
                           <span>Skills Matrix →</span>
@@ -201,9 +205,13 @@ export const AboutApp: React.FC = () => {
 
               {/* SECTION 02: KEY CREDENTIALS & BACKGROUND (SEMANTICALLY COLOR-CODED) */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-xs font-mono-code text-purple-400 font-bold uppercase tracking-widest">
-                  <span className="px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">02</span>
-                  <span>KEY CREDENTIALS & CAPABILITIES</span>
+                <div className="flex items-center gap-3 pb-1">
+                  <span className="px-2.5 py-1 rounded-md bg-purple-500/20 border border-purple-500/40 text-purple-300 font-bold text-xs font-mono-code shadow-sm">
+                    02
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold font-mono-code uppercase tracking-widest text-white/90">
+                    KEY CREDENTIALS & CAPABILITIES
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -259,9 +267,13 @@ export const AboutApp: React.FC = () => {
 
               {/* SECTION 03: CORE ENGINEERING DISCIPLINES */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-xs font-mono-code text-emerald-400 font-bold uppercase tracking-widest">
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30">03</span>
-                  <span>CORE DOMAINS & ROLES</span>
+                <div className="flex items-center gap-3 pb-1">
+                  <span className="px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs font-mono-code shadow-sm">
+                    03
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold font-mono-code uppercase tracking-widest text-white/90">
+                    CORE DOMAINS & ROLES
+                  </span>
                 </div>
 
                 <div className="p-6 sm:p-7 rounded-2xl bg-[#0d101b] border border-white/[0.1] shadow-xl">
@@ -269,9 +281,9 @@ export const AboutApp: React.FC = () => {
                     {identity.roles.map((role) => (
                       <div
                         key={role}
-                        className="p-3.5 rounded-xl bg-[#141828] hover:bg-[#1a2036] text-white font-mono-code font-bold text-xs border border-white/[0.1] transition-colors flex items-center space-x-2.5"
+                        className="p-3.5 rounded-xl bg-[#141828] hover:bg-[#1a2036] text-white font-mono-code font-bold text-xs border border-white/15 transition-colors flex items-center gap-3"
                       >
-                        <span className="w-2 h-2 rounded-full bg-blue-400" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-400 shrink-0" />
                         <span>{role}</span>
                       </div>
                     ))}
@@ -281,9 +293,13 @@ export const AboutApp: React.FC = () => {
 
               {/* SECTION 04: NEXT STEP (SYSTEMS SHOWCASE CTA) */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-xs font-mono-code text-blue-400 font-bold uppercase tracking-widest">
-                  <span className="px-2 py-0.5 rounded bg-blue-500/15 border border-blue-500/30">04</span>
-                  <span>EXPLORE SYSTEMS & ARCHITECTURES</span>
+                <div className="flex items-center gap-3 pb-1">
+                  <span className="px-2.5 py-1 rounded-md bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-bold text-xs font-mono-code shadow-sm">
+                    04
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold font-mono-code uppercase tracking-widest text-white/90">
+                    EXPLORE SYSTEMS & ARCHITECTURES
+                  </span>
                 </div>
 
                 <div className="p-8 rounded-2xl bg-[#0b1328] border border-blue-500/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
@@ -292,12 +308,12 @@ export const AboutApp: React.FC = () => {
                       INSPECT LIVE ARCHITECTURE DATAFLOWS
                     </h3>
                     <p className="text-xs sm:text-sm text-white/70 font-sans max-w-xl">
-                      Experience interactive architecture diagrams, state machines, and technical decisions for SHOEL, TubeFetch, and AI Video Clipper.
+                      Experience interactive architecture diagrams, state machines, and technical decisions for production apps and backend engines.
                     </p>
                   </div>
                   <button
                     onClick={() => openApp('projects')}
-                    className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold font-mono-code text-xs sm:text-sm flex items-center space-x-2 shadow-xl shadow-blue-600/30 transition-all shrink-0 cursor-pointer active:scale-95"
+                    className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-400 font-bold font-mono-code text-xs sm:text-sm flex items-center gap-2 shadow-xl shadow-blue-600/30 transition-all shrink-0 cursor-pointer active:scale-95"
                   >
                     <span>OPEN PROJECTS APP</span>
                     <ArrowRight className="w-4 h-4" />
@@ -468,38 +484,42 @@ export const AboutApp: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-6 rounded-xl bg-[#111422] border border-white/[0.08] space-y-2">
-                  <div className="text-xs font-mono-code text-blue-400 font-bold">
-                    01. ARCHITECTURAL RIGOR
+                <div className="p-6 rounded-2xl bg-[#111422] border border-white/10 space-y-3 shadow-lg">
+                  <div className="flex items-center gap-2.5 text-xs font-mono-code text-blue-400 font-bold">
+                    <span className="px-2 py-0.5 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-300">01</span>
+                    <span className="tracking-wider">ARCHITECTURAL RIGOR</span>
                   </div>
-                  <p className="text-xs text-white/70 font-sans leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
                     Prioritize strong types, clear data boundaries, atomic state transactions, and graceful error recovery over quick hacks.
                   </p>
                 </div>
 
-                <div className="p-6 rounded-xl bg-[#111422] border border-white/[0.08] space-y-2">
-                  <div className="text-xs font-mono-code text-purple-400 font-bold">
-                    02. ASYNCHRONOUS PIPELINES
+                <div className="p-6 rounded-2xl bg-[#111422] border border-white/10 space-y-3 shadow-lg">
+                  <div className="flex items-center gap-2.5 text-xs font-mono-code text-purple-400 font-bold">
+                    <span className="px-2 py-0.5 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-300">02</span>
+                    <span className="tracking-wider">ASYNCHRONOUS PIPELINES</span>
                   </div>
-                  <p className="text-xs text-white/70 font-sans leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
                     Offload heavy computing, media transcoding, and AI evaluations to dedicated background workers without blocking client responsiveness.
                   </p>
                 </div>
 
-                <div className="p-6 rounded-xl bg-[#111422] border border-white/[0.08] space-y-2">
-                  <div className="text-xs font-mono-code text-emerald-400 font-bold">
-                    03. GROUNDED AI SYSTEMS
+                <div className="p-6 rounded-2xl bg-[#111422] border border-white/10 space-y-3 shadow-lg">
+                  <div className="flex items-center gap-2.5 text-xs font-mono-code text-emerald-400 font-bold">
+                    <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">03</span>
+                    <span className="tracking-wider">GROUNDED AI SYSTEMS</span>
                   </div>
-                  <p className="text-xs text-white/70 font-sans leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
                     Integrate AI where it adds measurable leverage — transcription, summarization, and automation — anchored with strict validation.
                   </p>
                 </div>
 
-                <div className="p-6 rounded-xl bg-[#111422] border border-white/[0.08] space-y-2">
-                  <div className="text-xs font-mono-code text-amber-400 font-bold">
-                    04. CRAFTSMANSHIP & POLISH
+                <div className="p-6 rounded-2xl bg-[#111422] border border-white/10 space-y-3 shadow-lg">
+                  <div className="flex items-center gap-2.5 text-xs font-mono-code text-amber-400 font-bold">
+                    <span className="px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300">04</span>
+                    <span className="tracking-wider">CRAFTSMANSHIP & POLISH</span>
                   </div>
-                  <p className="text-xs text-white/70 font-sans leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
                     Software should feel tactile, fast, and pleasant. Sound effects, feedback animations, and dark minimalist aesthetics elevate utility.
                   </p>
                 </div>

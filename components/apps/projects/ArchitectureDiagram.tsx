@@ -160,14 +160,17 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
       }`}
     >
       {/* Top Diagram Toolbar */}
-      <div className="px-6 py-4 bg-[#0e0e16] border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+      <div className="px-6 py-4 bg-[#0c0d16] border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center space-x-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse-dot" />
-          <span className="text-sm font-bold text-white tracking-wide">
+          <span className="flex h-2.5 w-2.5 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
+          </span>
+          <span className="text-sm font-bold text-white tracking-wide font-mono-code">
             {project.name} ARCHITECTURE GRAPH
           </span>
-          <span className="text-xs text-white/40 hidden sm:inline">
-            // {nodes.length} System Nodes · {edges.length} Data Pipelines
+          <span className="text-xs text-white/40 hidden md:inline font-mono-code">
+            • {nodes.length} Nodes • {edges.length} Data Pipelines
           </span>
         </div>
 
@@ -176,58 +179,38 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
           <button
             onClick={handleRunSimulation}
             disabled={simulating}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 transition-all ${
+            className={`px-4 py-2.5 rounded-xl text-xs font-bold font-mono-code flex items-center space-x-2 transition-all cursor-pointer ${
               simulating
                 ? 'bg-blue-600/30 text-blue-300 border border-blue-500/50 cursor-wait'
-                : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/25 active:scale-95'
+                : 'bg-blue-600 hover:bg-blue-500 text-white border border-blue-400 shadow-lg shadow-blue-600/30 active:scale-95'
             }`}
           >
-            <Play className={`w-3.5 h-3.5 ${simulating ? 'animate-spin' : 'fill-white'}`} />
-            <span>{simulating ? 'TRACING PIPELINE FLOW...' : 'SIMULATE DATA FLOW'}</span>
+            <Play className={`w-3.5 h-3.5 ${simulating ? 'animate-spin' : 'fill-current'}`} />
+            <span>{simulating ? 'TRACING FLOW...' : 'SIMULATE DATA FLOW'}</span>
           </button>
 
           <button
             onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white/60 hover:text-white border border-white/[0.08] transition-colors"
+            className="p-2.5 rounded-xl bg-[#141728] hover:bg-[#1e233d] text-white border border-white/20 hover:border-white/40 transition-colors cursor-pointer shadow-md active:scale-95"
             title={isFullscreen ? 'Exit Fullscreen' : 'Expand Visualizer'}
           >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4 text-blue-400" />}
           </button>
         </div>
       </div>
 
       {/* Main Interactive Diagram Canvas */}
-      <div className="flex-1 bg-grid-pattern relative p-6 sm:p-10 flex flex-col justify-between overflow-auto min-h-[440px]">
-        {/* End-to-End Visual Dataflow Pipeline Banner */}
-        <div className="mb-6 p-4 rounded-xl bg-[#0d101a] border border-white/[0.08] shadow-md">
-          <div className="text-[11px] text-white/50 font-bold uppercase tracking-wider mb-2.5 flex items-center space-x-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-            <span>END-TO-END DATA FLOW PIPELINE:</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono-code">
-            {getPipelineStages(project.id).map((stage, idx, arr) => (
-              <React.Fragment key={stage}>
-                <span className="px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white font-bold whitespace-nowrap">
-                  {stage}
-                </span>
-                {idx < arr.length - 1 && (
-                  <span className="text-blue-400 font-bold px-0.5 select-none">→</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-
+      <div className="flex-1 bg-grid-pattern relative p-6 sm:p-10 flex flex-col justify-between overflow-auto min-h-[460px]">
         {/* Active Stage Banner during simulation */}
         {simulating && activeStepIndex >= 0 && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 px-4 py-2 rounded-xl bg-blue-950/90 border border-blue-500/40 text-blue-300 text-xs flex items-center space-x-2.5 shadow-xl backdrop-blur-md w-fit"
+            className="mb-6 px-4 py-2.5 rounded-xl bg-blue-950/90 border border-blue-500/40 text-blue-200 text-xs font-mono-code flex items-center space-x-2.5 shadow-xl backdrop-blur-md w-fit"
           >
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
             <span className="font-bold">
-              STAGE {activeStepIndex + 1}/{nodes.length}: {nodes[activeStepIndex]?.label}
+              SIMULATION STEP {activeStepIndex + 1}/{nodes.length}: {nodes[activeStepIndex]?.label}
             </span>
           </motion.div>
         )}
@@ -304,20 +287,20 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ projec
         </div>
 
         {/* Data Pipeline Legend / Flow Ribbon */}
-        <div className="pt-4 border-t border-white/[0.08] flex items-center space-x-3 overflow-x-auto text-xs text-white/60">
-          <span className="text-white/40 text-xs font-semibold whitespace-nowrap">
-            EXECUTION PIPELINE:
+        <div className="pt-4 border-t border-white/[0.08] flex items-center gap-2 overflow-x-auto text-[11px] text-white/50 font-mono-code scrollbar-none">
+          <span className="text-white/40 font-bold uppercase tracking-wider whitespace-nowrap mr-1">
+            Data Pipeline:
           </span>
           {edges.map((edge, idx) => (
             <div
               key={idx}
-              className="flex items-center space-x-2 whitespace-nowrap px-3 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06]"
+              className="flex items-center space-x-1.5 whitespace-nowrap px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.06] text-white/70"
             >
-              <span className="text-white font-medium">{edge.from}</span>
+              <span className="font-semibold text-white/90">{edge.from}</span>
               <span className="text-blue-400 font-bold">→</span>
-              <span className="text-white font-medium">{edge.to}</span>
+              <span className="font-semibold text-white/90">{edge.to}</span>
               {edge.label && (
-                <span className="text-[10px] text-white/40 italic">({edge.label})</span>
+                <span className="text-[10px] text-blue-300/60 font-mono">({edge.label})</span>
               )}
             </div>
           ))}
