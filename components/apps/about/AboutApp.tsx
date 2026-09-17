@@ -137,7 +137,7 @@ export const AboutApp: React.FC = () => {
                 <div className="p-7 sm:p-9 rounded-2xl bg-[#0e1220] border border-blue-500/30 shadow-2xl relative overflow-hidden">
                   <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
                     {/* Portrait Avatar & Status Badge */}
-                    <div className="shrink-0 flex flex-col items-center gap-3 group">
+                    <div className="shrink-0 flex flex-col items-center group">
                       <div className="w-40 h-52 sm:w-48 sm:h-60 rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-[#141828] relative flex items-end justify-center">
                         <Image
                           src={identity.avatar || '/developer.png'}
@@ -147,10 +147,10 @@ export const AboutApp: React.FC = () => {
                           className="object-contain object-bottom transition-transform duration-500 group-hover:scale-105"
                           priority
                         />
-                      </div>
-                      <div className="bg-[#090b14] border border-emerald-500/50 text-emerald-400 text-[11px] font-mono-code font-bold px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap shadow-xl">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
-                        <span>AVAILABLE FOR WORK</span>
+                        <div className="absolute bottom-2.5 z-10 bg-[#090b14]/85 backdrop-blur-md border border-emerald-500/50 text-emerald-400 text-[10px] sm:text-[11px] font-mono-code font-bold px-3 py-1 sm:px-3.5 sm:py-1 rounded-full flex items-center gap-1.5 sm:gap-2 whitespace-nowrap shadow-xl">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
+                          <span>AVAILABLE FOR WORK</span>
+                        </div>
                       </div>
                     </div>
 
